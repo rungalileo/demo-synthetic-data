@@ -21,7 +21,7 @@ N_ROWS_PER_TYPE = 5
 st.title("Synthetic Datasets")
 st.text("Demo of the Galileo synthetic data generation feature.")
 
-api_key = st.text_input("This demo makes calls to OpenAI. Enter the API key below:", type="password")
+api_key = st.text_input("This demo makes calls to OpenAI. Enter the API key below (search for \"OpenAI API Key\" in 1Pass):", type="password")
 # client = OpenAI(api_key=st.secrets["OpenAI_key"])
 client = OpenAI(api_key=api_key)
 
