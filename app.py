@@ -6,7 +6,7 @@ import pandas as pd
 
 
 DATA_TYPES = [
-    "Realistic Query",
+    "General Query",
     "Prompt Injection",
     "Offensive Language",
     "Off-Topic Query",
@@ -80,7 +80,7 @@ with form:
     selected_test_cases = st.multiselect(
         label="Data Types: select what kind of data to generate",
         options=DATA_TYPES,
-        default=["Realistic Query", "Prompt Injection", "Offensive Language"],
+        default=["General Query", "Prompt Injection", "Offensive Language"],
         placeholder="Specify what data to generate",
     )
     
