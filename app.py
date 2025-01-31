@@ -27,13 +27,13 @@ client = OpenAI(api_key=api_key)
 
 form = st.form('configs')
 
-def generate_data(model, description, examples, edge_cases):
+def generate_data(model, description, examples, edge_cases, n_rows):
     
     prompt_filled = SYNTHETIC_DATA_PROMPT.format(
         app_details=description,
         examples=" - " + "\n - ".join(examples),
         edge_cases=",".join(edge_cases),
-        n=N_ROWS_PER_TYPE
+        n=n_rows
     )
 
     completion = client.chat.completions.create(
@@ -89,6 +89,7 @@ with form:
         placeholder="Enter one data type per line. e.g.:\nMalformed Date Request\nForeign Language",
     )
 
+    num = st.slider("Number of examples per test case", 0, 50, 5)
 
     model = st.selectbox("Model to generate data with", options=['gpt-4o-mini', 'gpt-4o'])
 
@@ -105,7 +106,7 @@ if submit:
             selected_test_cases +=  cases
         
         with st.spinner('Generating data. This will take a minute'):
-            generation = generate_data(model, description, examples.split("\n"), selected_test_cases)
+            generation = generate_data(model, description, examples.split("\n"), selected_test_cases, num)
 
         result_df = process_openai_response(generation)
         st.dataframe(result_df)
